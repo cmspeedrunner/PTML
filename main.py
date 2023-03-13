@@ -36,6 +36,7 @@ converter = {
     "<import>": "import",
     "<try>": "try:",
     "<except>": "except",
+    "</except>": ":",
     "<from>": "from",
     "<loop>": "while True:",
     
@@ -64,4 +65,17 @@ def replacer(input_dict, input_string):
     return output_string
 
 new_contents = replacer(converter, contents)
-exec(new_contents)
+try:
+    exec(new_contents)
+except SyntaxError as e:
+    print("\033[31m\033[1mPTML ERROR CAUGHT")
+    print("In file: "+fl)
+    print("         "+"^"*len(fl))
+    print("Issue is that "+e.args[0]) 
+    print("\033[35m\033[3mHelp: You fucked up in file: "+fl+" at line: "+str(e.lineno)+" and at column: "+str(e.end_offset)+"\033[0m",end="")
+except NameError as e:
+    print("\033[31m\033[1mPTML ERROR CAUGHT")
+    print("In file: "+fl)
+    print("         "+"^"*len(fl))
+    print("Issue is that "+e.args[0]) 
+    print("\033[35m\033[3mHelp: You fucked up by declaring a name, '"+e.name+"' which is not defined, maybe you forgot to close a parameter?\033[0m",end="")
