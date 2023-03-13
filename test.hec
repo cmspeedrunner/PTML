@@ -1,0 +1,31 @@
+<import> os
+
+<print>"Hello World!"</print>
+<if>500==500</if>
+    <print>"Maths is mathing"</print>
+<for>i in <range>5</range></for>
+    <print>i+1</print>
+<def>myfunc()</def>
+    <print>"This is a function!"</print>
+myfunc()
+myfunc()
+myfunc()
+
+<comment> This is a comment!
+<comment> Pretty weird
+
+name = <input>"Whats your name?\n"</input>
+<print>"Hello, "+name</input>
+<print>"The length of your name is "+<str><len>name</len></str>+" chars"</print>
+first_num = <input>"Welcome to the number addition tool, enter your first num\n"</input>
+second_num = <input>"Now, enter your second num\n"</input>
+<print>"Your result is: "+<str><int>first_num</int>+<int>second_num</int></str></print>
+yorn = <input>"Can i message you(y/n)"</input>
+yorn = yorn.strip()
+<if>yorn == "y"</if>
+    os.system("msg* Hello!")
+<if>yorn == "n"</if>
+    <print>"Oh, thats a shame."</print>
+<else></else>
+    <print>"Not a valid choice!"</print>
+
