@@ -1,4 +1,4 @@
-<print>"Welcome to synny, a mini calculator made in PTML"</print>
+<print>"Welcome to a mini calculator made in PTML"</print>
 <loop>
     content = <input>">>>"</input>
     <print>eval(content)</print>
