@@ -1,0 +1,4 @@
+# Ignore all .ptml files except the examples
+*.ptml
+!.example.ptml
+!.calc.ptml

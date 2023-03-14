@@ -1,4 +1,6 @@
 import sys
+import traceback
+
 fl = sys.argv[1]
 with open(fl) as contents:
     contents = contents.read()
@@ -67,15 +69,14 @@ def replacer(input_dict, input_string):
 new_contents = replacer(converter, contents)
 try:
     exec(new_contents)
-except SyntaxError as e:
+except (SyntaxError, NameError) as e:
+    _, _, exc_tb = sys.exc_info()
     print("\033[31m\033[1mPTML ERROR CAUGHT")
-    print("In file: "+fl)
+    print(f"In file: {fl}")
     print("         "+"^"*len(fl))
-    print("Issue is that "+e.args[0]) 
-    print("\033[35m\033[3mHelp: You fucked up in file: "+fl+" at line: "+str(e.lineno)+" and at column: "+str(e.end_offset)+"\033[0m",end="")
-except NameError as e:
-    print("\033[31m\033[1mPTML ERROR CAUGHT")
-    print("In file: "+fl)
-    print("         "+"^"*len(fl))
-    print("Issue is that "+e.args[0]) 
-    print("\033[35m\033[3mHelp: You fucked up by declaring a name, '"+e.name+"' which is not defined, maybe you forgot to close a parameter?\033[0m",end="")
+    print("Issue is that "+e.args[0])
+    print(f"\033[35m\033[3mHelp: You fucked up in file: {fl} at line: {exc_tb.tb_lineno}\033[0m")
+except Exception as e:
+    print(traceback.format_exc())
+finally:
+    sys.exit()
